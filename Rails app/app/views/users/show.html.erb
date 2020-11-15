@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Номер телефона:</strong>
+  <%= @user.phone_number %>
+</p>
+
+<p>
+  <strong>Имя:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Фамилия:</strong>
+  <%= @user.surname %>
+</p>
+
+<p>
+  <strong>Отчество:</strong>
+  <%= @user.patronymic %>
+</p>
+<% unless @user.bills.empty? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Задолженность</th>
+        <th>Срок</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @user.invoices.each do |invoice| %>
+        <tr>
+        <% if invoice.price > 0 %>
+          <%= form_with(url: '/pay', method: 'post', local: true) do |form| %>
+            <%= hidden_field_tag 'id', invoice.id %>
+            <td><%= invoice.price %> руб.</td>
+            <td><%= ((Time.zone.now - invoice.created_at) / 3600 /24).round(2) %> дней</td>
+            <td><input name='amount'/></td>
+            <td><%= form.submit 'Погасить' %></td>
+          <% end %>
+        <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to 'Изменить', edit_user_path(@user) %> |
+<%= link_to 'Назад', users_path %>

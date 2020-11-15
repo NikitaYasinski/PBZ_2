@@ -1,0 +1,42 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label "Номер телефона" %>
+    <%= form.text_field :phone_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Имя" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Фамилия" %>
+    <%= form.text_field :surname %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Отчество" %>
+    <%= form.text_field :patronymic %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Адрес" %>
+    <%= form.text_field :adress %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Подтвердить" %>
+  </div>
+<% end %>

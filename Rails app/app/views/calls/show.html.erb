@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Продолжительность:</strong>
+  <%= @call.duration %>
+</p>
+
+<p>
+  <strong>Оплачен:</strong>
+  <%= @call.payment_state %>
+</p>
+
+<p>
+  <strong>Время:</strong>
+  <%= @call.time %>
+</p>
+
+<p>
+  <strong>Город:</strong>
+  <%= @call.city %>
+</p>
+
+<%= link_to 'Править', edit_call_path(@call) %> |
+<%= link_to 'Назад', calls_path %>
